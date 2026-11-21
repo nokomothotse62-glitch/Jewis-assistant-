@@ -3,95 +3,106 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#020914">
-<title>JEVIS | Command Center</title>
-
+<title>JEVIS 2.0</title>
 <style>
 *{box-sizing:border-box}
 body{
- margin:0;background:radial-gradient(ellipse at center,#103c5b 0%,#061526 45%,#01050c 100%);
- color:#b9edff;font-family:Arial,sans-serif;
- min-height:100vh;text-align:center;padding:25px 18px;
+ margin:0;min-height:100vh;padding:20px 15px 35px;
+ background:radial-gradient(ellipse at 50% 35%,#103b59,#061323 48%,#01050b 100%);
+ color:#b9edff;font-family:Arial,sans-serif;text-align:center;
+ overflow-x:hidden
 }
-h1{
- font-size:38px;letter-spacing:12px;color:#62e7ff;
- text-shadow:0 0 20px #00aaff;margin:12px 0 5px;
-}
-.sub{font-size:10px;letter-spacing:4px;color:#75a9c4}
-#clock{font-size:34px;letter-spacing:5px;margin-top:28px;color:#e0faff}
-#date{font-size:11px;letter-spacing:2px;color:#75a9c4;margin-top:8px}
+header{padding:12px}
+h1{font-size:35px;letter-spacing:12px;margin:5px;color:#8cecff;text-shadow:0 0 22px #00aaff}
+.sub{font-size:9px;letter-spacing:4px;color:#6daac8}
+#clock{font-size:29px;letter-spacing:5px;margin-top:20px;color:#d8faff}
+#date{font-size:10px;letter-spacing:2px;color:#6daac8;margin-top:7px}
+.layout{max-width:500px;margin:auto}
 .core{
- width:220px;height:220px;border:2px solid #36dfff;
- border-radius:50%;margin:38px auto 25px;
+ width:205px;height:205px;margin:30px auto 20px;
+ border:2px solid #36dfff;border-radius:50%;
  display:grid;place-items:center;position:relative;
- box-shadow:0 0 30px #008cff,inset 0 0 35px #087cff;
- animation:pulse 3s infinite;
+ box-shadow:0 0 25px #008cff,inset 0 0 35px #087cff;
+ animation:pulse 3s infinite
 }
 .core:before,.core:after{
  content:"";position:absolute;border:1px dashed #54dfff;
- border-radius:50%;inset:13px;animation:spin 14s linear infinite;
+ border-radius:50%;inset:12px;animation:spin 13s linear infinite
 }
-.core:after{inset:32px;animation-direction:reverse;animation-duration:9s}
-.j{
- font-size:90px;color:#d5fbff;
- text-shadow:0 0 25px #00baff;
+.core:after{inset:29px;animation-direction:reverse;animation-duration:8s}
+.j{font-size:82px;color:#d9fbff;text-shadow:0 0 28px #00baff}
+#state{font-size:11px;letter-spacing:3px;color:#61eaff;margin:15px}
+.panels{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:22px 0}
+.panel{
+ border:1px solid #197da8;background:#071c30bb;
+ padding:15px 8px;border-radius:8px;
+ box-shadow:inset 0 0 15px #087cff22
 }
-.status{font-size:11px;letter-spacing:3px;color:#58e6ff}
-.panel{max-width:440px;margin:30px auto}
-.section{
- text-align:left;font-size:10px;letter-spacing:3px;
- color:#5fc9e8;margin:25px 0 10px;
-}
+.panel b{display:block;font-size:10px;letter-spacing:2px;color:#6ce6ff;margin-bottom:8px}
+.panel span{font-size:10px;color:#b9edff;letter-spacing:1px}
 button{
- width:100%;padding:17px;margin:7px 0;
- background:linear-gradient(110deg,#071b30,#0b304b);
- border:1px solid #27bce8;border-radius:9px;
- color:#d7f8ff;font-size:12px;letter-spacing:2px;
- box-shadow:0 0 12px #006b9a33;
+ width:100%;padding:16px;margin:6px 0;
+ border:1px solid #36dfff;border-radius:8px;
+ background:linear-gradient(100deg,#06192d,#104267);
+ color:#d8faff;font-size:11px;letter-spacing:2px
 }
-button:active{background:#12577b}
-.footer{font-size:9px;letter-spacing:3px;color:#477e9c;margin-top:30px}
+button:active{background:#12618a}
+.wave{height:35px;display:flex;justify-content:center;align-items:center;gap:4px;margin:12px}
+.wave i{display:block;width:3px;height:8px;background:#42dfff;box-shadow:0 0 8px #00baff;animation:wave 1s infinite alternate}
+.wave i:nth-child(2n){animation-delay:.2s}
+.wave i:nth-child(3n){animation-delay:.4s}
+.footer{font-size:9px;letter-spacing:3px;color:#477e9c;margin-top:25px}
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes pulse{50%{box-shadow:0 0 48px #008cff,inset 0 0 45px #087cff}}
+@keyframes wave{to{height:29px}}
 </style>
 </head>
-
 <body>
+<header>
 <h1>JEVIS</h1>
 <div class="sub">PERSONAL INTELLIGENCE SYSTEM</div>
-
 <div id="clock">00:00:00</div>
-<div id="date">INITIALIZING DATE</div>
+<div id="date">INITIALIZING</div>
+</header>
 
+<main class="layout">
 <div class="core"><div class="j">J</div></div>
-
-<div class="status">● SYSTEM ONLINE</div>
-<div class="sub" style="margin-top:9px">AWAITING COMMAND, SIR</div>
-
-<div class="panel">
- <div class="section">MAIN SYSTEMS</div>
- <button onclick="ask('Hello JEVIS. Introduce yourself.')">◉ ACTIVATE JEVIS</button>
- <button onclick="ask('Help me manage my day and personal tasks.')">01 / PERSONAL ASSISTANT</button>
- <button onclick="ask('Help me research and analyze a topic.')">02 / INTELLIGENCE</button>
- <button onclick="ask('Help me organize my work and schedule.')">03 / PRODUCTIVITY</button>
- <button onclick="ask('Help me develop my AI website business mission.')">04 / BUSINESS MISSION</button>
- <button onclick="ask('Help me solve this problem step by step.')">05 / SYSTEM ANALYSIS</button>
+<div id="state">● SYSTEM ONLINE</div>
+<div class="sub">AWAITING COMMAND, SIR</div>
+<div class="wave" aria-label="Animated system visualizer">
+<i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
 </div>
 
-<div class="footer">JEVIS SYSTEMS • EXECUTIVE MODE</div>
+<div class="panels">
+ <div class="panel"><b>CORE SYSTEM</b><span>ONLINE</span></div>
+ <div class="panel"><b>VOICE LINK</b><span>READY</span></div>
+ <div class="panel"><b>INTELLIGENCE</b><span>STANDBY</span></div>
+ <div class="panel"><b>EXECUTIVE MODE</b><span>ACTIVE</span></div>
+</div>
+
+<button onclick="activate()">◉ ACTIVATE JEVIS</button>
+<button onclick="ask('Help me manage my day and tasks.')">01 / PERSONAL ASSISTANT</button>
+<button onclick="ask('Help me research and analyze a topic.')">02 / INTELLIGENCE</button>
+<button onclick="ask('Help me organize my work and schedule.')">03 / PRODUCTIVITY</button>
+<button onclick="ask('Help me develop my website business.')">04 / BUSINESS MISSION</button>
+
+<div class="footer">JEVIS 2.0 • EXECUTIVE SYSTEMS</div>
+</main>
 
 <script>
 function updateClock(){
- const now=new Date();
- document.getElementById("clock").textContent=
- now.toLocaleTimeString("en-US");
- document.getElementById("date").textContent=
- now.toLocaleDateString("en-US",{weekday:"long",year:"numeric",month:"long",day:"numeric"});
+ const d=new Date();
+ document.getElementById("clock").textContent=d.toLocaleTimeString("en-US");
+ document.getElementById("date").textContent=d.toLocaleDateString("en-US",{weekday:"long",year:"numeric",month:"long",day:"numeric"});
 }
-setInterval(updateClock,1000);
-updateClock();
+setInterval(updateClock,1000);updateClock();
 
+function activate(){
+ document.getElementById("state").textContent="● OPENING JEVIS";
+ window.location.href="https://chatgpt.com/";
+}
 function ask(q){
  window.location.href="https://chatgpt.com/?q="+encodeURIComponent(q);
 }
