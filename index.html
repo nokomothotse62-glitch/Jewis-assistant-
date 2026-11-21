@@ -4,109 +4,44 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#050914">
-<title>JEVIS - Personal Assistant</title>
+<meta name="theme-color" content="#020711">
+<title>JEVIS AI</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:radial-gradient(ellipse at top,#102c50,#050914 70%);color:#edf7ff;font-family:-apple-system,BlinkMacSystemFont,sans-serif;min-height:100vh}
-main{max-width:700px;margin:auto;padding:25px 18px}
-header{display:flex;justify-content:space-between;align-items:center}
-.brand{font-size:23px;font-weight:bold;letter-spacing:5px}
-.status{color:#65caff;font-size:11px;border:1px solid #1d5b83;padding:8px;border-radius:20px}
-.core{width:145px;height:145px;margin:45px auto 25px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle,#168bd4,#07172b 70%);border:2px solid #28a9ff;box-shadow:0 0 35px #168be9,0 0 75px #0877d344}
-.core span{font-size:48px}
-h1{text-align:center;font-size:27px}
-.sub{text-align:center;color:#8da5c2}
-h3{font-size:12px;color:#78caff;letter-spacing:3px;margin-top:30px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.tile,.panel{background:#0b1729;border:1px solid #1b3557;border-radius:15px;padding:17px;color:#edf7ff}
-.tile{text-align:left;min-height:100px}
-.tile b{display:block;margin-bottom:8px}
-small,p{color:#8da5c2}
-button{cursor:pointer;font:inherit}
-textarea,input{width:100%;padding:13px;border-radius:10px;border:1px solid #244365;background:#050c18;color:white;font:inherit}
-.action{width:100%;padding:13px;margin-top:10px;background:#087ac2;color:white;border:0;border-radius:10px;font-weight:bold}
-.taskrow{display:flex;gap:8px;margin-top:10px}
-.taskrow button{background:#087ac2;color:white;border:0;border-radius:10px;padding:10px}
-ul{padding-left:20px}
-li{padding:7px;color:#d9eaff}
-footer{text-align:center;color:#607994;font-size:11px;margin-top:30px}
+body{margin:0;background:radial-gradient(circle,#082c49,#020711 65%);color:#b9f5ff;font-family:Arial;text-align:center;min-height:100vh;padding:25px 15px}
+h1{letter-spacing:8px;color:#42dfff;text-shadow:0 0 20px #008cff}
+#clock{font-size:38px;letter-spacing:5px;margin-top:30px}
+.small{font-size:11px;letter-spacing:3px;color:#6ca9c5}
+.core{width:220px;height:220px;border:2px solid #29dfff;border-radius:50%;margin:45px auto 25px;display:grid;place-items:center;box-shadow:0 0 25px #008cff,inset 0 0 30px #087cff;position:relative;animation:glow 3s infinite}
+.core:before,.core:after{content:"";position:absolute;border:1px dashed #29dfff;border-radius:50%;inset:13px;animation:spin 15s linear infinite}
+.core:after{inset:32px;animation-direction:reverse}
+.j{font-size:85px;color:#bafaff;text-shadow:0 0 25px #00aaff}
+button{background:#061d32;border:1px solid #29dfff;color:#b9f5ff;padding:16px;border-radius:8px;width:100%;font-size:13px;letter-spacing:2px;margin:7px 0}
+button:active{background:#075078}
+.panel{max-width:440px;margin:auto}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes glow{50%{box-shadow:0 0 45px #008cff,inset 0 0 45px #087cff}}
 </style>
 </head>
 <body>
-<main>
-<header>
-<div class="brand">JEVIS</div>
-<div class="status">● SYSTEM ONLINE</div>
-</header>
-<div class="core"><span>J</span></div>
-<h1>Good evening.</h1>
-<p class="sub">Your personal assistant interface</p>
-
-<h3>QUICK ACCESS</h3>
-<div class="grid">
-<button class="tile" onclick="ask('Help me plan my day and organise my tasks.')"><b>◷ Daily Planner</b><small>Organise your priorities</small></button>
-<button class="tile" onclick="ask('Help me research a topic and explain it simply.')"><b>⌕ Research</b><small>Explore ideas and questions</small></button>
-<button class="tile" onclick="ask('Help me plan an AI video, script and scenes.')"><b>▶ Video Studio</b><small>Plan videos and content</small></button>
-<button class="tile" onclick="ask('Help me write something.')"><b>✎ Writing Desk</b><small>Messages and captions</small></button>
-<button class="tile" onclick="ask('Help me solve a problem step by step.')"><b>◇ Problem Solver</b><small>Work through challenges</small></button>
-<button class="tile" onclick="openChat()"><b>◉ JEVIS Chat</b><small>Open your AI assistant</small></button>
-</div>
-
-<h3>COMMAND CENTRE</h3>
+<h1>JEVIS</h1>
+<div class="small">PERSONAL INTELLIGENCE SYSTEM</div>
+<div id="clock">00:00:00</div>
+<div class="small">SYSTEM ONLINE</div>
+<div class="core"><div class="j">J</div></div>
+<div class="small">AWAITING COMMAND, SIR</div>
 <div class="panel">
-<p>What would you like JEVIS to help you with?</p>
-<textarea id="command" placeholder="Type your command..."></textarea>
-<button class="action" onclick="sendCommand()">SEND TO JEVIS ↗</button>
+<button onclick="ask('Hello JEVIS. Introduce yourself.')">◉ ACTIVATE JEVIS</button>
+<button onclick="ask('Help me plan my day.')">01 / PERSONAL ASSISTANT</button>
+<button onclick="ask('Help me research something.')">02 / INTELLIGENCE</button>
+<button onclick="ask('Help me organise my tasks.')">03 / PRODUCTIVITY</button>
+<button onclick="ask('Help me solve a problem.')">04 / ANALYSIS</button>
 </div>
-
-<h3>PERSONAL TASK LIST</h3>
-<div class="panel">
-<p>Your tasks are saved in this browser.</p>
-<div class="taskrow">
-<input id="task" placeholder="Add a task">
-<button onclick="addTask()">ADD</button>
-</div>
-<ul id="tasks"></ul>
-</div>
-<footer>JEVIS CLASSIC INTERFACE<br>PERSONAL ASSISTANT SYSTEM</footer>
-</main>
+<div class="small" style="margin-top:25px">JEVIS SYSTEMS • EXECUTIVE MODE</div>
 <script>
-function openChat(){location.href='https://chatgpt.com/'}
-function ask(p){location.href='https://chatgpt.com/?q='+encodeURIComponent(p)}
-function sendCommand(){
-let v=document.getElementById('command').value.trim();
-if(v)ask(v);
-}
-function getTasks(){
-try{return JSON.parse(localStorage.getItem('jevis_tasks')||'[]')}
-catch(e){return []}
-}
-function renderTasks(){
-let ul=document.getElementById('tasks');
-ul.innerHTML='';
-getTasks().forEach((v,i)=>{
-let li=document.createElement('li');
-li.textContent=v+' ';
-let b=document.createElement('button');
-b.textContent='Remove';
-b.onclick=()=>{
-let t=getTasks();t.splice(i,1);
-localStorage.setItem('jevis_tasks',JSON.stringify(t));
-renderTasks();
-};
-li.appendChild(b);ul.appendChild(li);
-});
-}
-function addTask(){
-let el=document.getElementById('task');
-let v=el.value.trim();if(!v)return;
-let t=getTasks();t.push(v);
-localStorage.setItem('jevis_tasks',JSON.stringify(t));
-el.value='';renderTasks();
-}
-renderTasks();
+function update(){document.getElementById('clock').textContent=new Date().toLocaleTimeString()}
+setInterval(update,1000);update();
+function ask(q){location.href='https://chatgpt.com/?q='+encodeURIComponent(q)}
 </script>
 </body>
 </html>
-
