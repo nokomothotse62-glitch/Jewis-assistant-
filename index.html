@@ -4,44 +4,97 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#020711">
-<title>JEVIS AI</title>
+<meta name="theme-color" content="#020914">
+<title>JEVIS | Command Center</title>
+
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:radial-gradient(circle,#082c49,#020711 65%);color:#b9f5ff;font-family:Arial;text-align:center;min-height:100vh;padding:25px 15px}
-h1{letter-spacing:8px;color:#42dfff;text-shadow:0 0 20px #008cff}
-#clock{font-size:38px;letter-spacing:5px;margin-top:30px}
-.small{font-size:11px;letter-spacing:3px;color:#6ca9c5}
-.core{width:220px;height:220px;border:2px solid #29dfff;border-radius:50%;margin:45px auto 25px;display:grid;place-items:center;box-shadow:0 0 25px #008cff,inset 0 0 30px #087cff;position:relative;animation:glow 3s infinite}
-.core:before,.core:after{content:"";position:absolute;border:1px dashed #29dfff;border-radius:50%;inset:13px;animation:spin 15s linear infinite}
-.core:after{inset:32px;animation-direction:reverse}
-.j{font-size:85px;color:#bafaff;text-shadow:0 0 25px #00aaff}
-button{background:#061d32;border:1px solid #29dfff;color:#b9f5ff;padding:16px;border-radius:8px;width:100%;font-size:13px;letter-spacing:2px;margin:7px 0}
-button:active{background:#075078}
-.panel{max-width:440px;margin:auto}
+body{
+ margin:0;background:radial-gradient(ellipse at center,#103c5b 0%,#061526 45%,#01050c 100%);
+ color:#b9edff;font-family:Arial,sans-serif;
+ min-height:100vh;text-align:center;padding:25px 18px;
+}
+h1{
+ font-size:38px;letter-spacing:12px;color:#62e7ff;
+ text-shadow:0 0 20px #00aaff;margin:12px 0 5px;
+}
+.sub{font-size:10px;letter-spacing:4px;color:#75a9c4}
+#clock{font-size:34px;letter-spacing:5px;margin-top:28px;color:#e0faff}
+#date{font-size:11px;letter-spacing:2px;color:#75a9c4;margin-top:8px}
+.core{
+ width:220px;height:220px;border:2px solid #36dfff;
+ border-radius:50%;margin:38px auto 25px;
+ display:grid;place-items:center;position:relative;
+ box-shadow:0 0 30px #008cff,inset 0 0 35px #087cff;
+ animation:pulse 3s infinite;
+}
+.core:before,.core:after{
+ content:"";position:absolute;border:1px dashed #54dfff;
+ border-radius:50%;inset:13px;animation:spin 14s linear infinite;
+}
+.core:after{inset:32px;animation-direction:reverse;animation-duration:9s}
+.j{
+ font-size:90px;color:#d5fbff;
+ text-shadow:0 0 25px #00baff;
+}
+.status{font-size:11px;letter-spacing:3px;color:#58e6ff}
+.panel{max-width:440px;margin:30px auto}
+.section{
+ text-align:left;font-size:10px;letter-spacing:3px;
+ color:#5fc9e8;margin:25px 0 10px;
+}
+button{
+ width:100%;padding:17px;margin:7px 0;
+ background:linear-gradient(110deg,#071b30,#0b304b);
+ border:1px solid #27bce8;border-radius:9px;
+ color:#d7f8ff;font-size:12px;letter-spacing:2px;
+ box-shadow:0 0 12px #006b9a33;
+}
+button:active{background:#12577b}
+.footer{font-size:9px;letter-spacing:3px;color:#477e9c;margin-top:30px}
 @keyframes spin{to{transform:rotate(360deg)}}
-@keyframes glow{50%{box-shadow:0 0 45px #008cff,inset 0 0 45px #087cff}}
+@keyframes pulse{50%{box-shadow:0 0 48px #008cff,inset 0 0 45px #087cff}}
 </style>
 </head>
+
 <body>
 <h1>JEVIS</h1>
-<div class="small">PERSONAL INTELLIGENCE SYSTEM</div>
+<div class="sub">PERSONAL INTELLIGENCE SYSTEM</div>
+
 <div id="clock">00:00:00</div>
-<div class="small">SYSTEM ONLINE</div>
+<div id="date">INITIALIZING DATE</div>
+
 <div class="core"><div class="j">J</div></div>
-<div class="small">AWAITING COMMAND, SIR</div>
+
+<div class="status">● SYSTEM ONLINE</div>
+<div class="sub" style="margin-top:9px">AWAITING COMMAND, SIR</div>
+
 <div class="panel">
-<button onclick="ask('Hello JEVIS. Introduce yourself.')">◉ ACTIVATE JEVIS</button>
-<button onclick="ask('Help me plan my day.')">01 / PERSONAL ASSISTANT</button>
-<button onclick="ask('Help me research something.')">02 / INTELLIGENCE</button>
-<button onclick="ask('Help me organise my tasks.')">03 / PRODUCTIVITY</button>
-<button onclick="ask('Help me solve a problem.')">04 / ANALYSIS</button>
+ <div class="section">MAIN SYSTEMS</div>
+ <button onclick="ask('Hello JEVIS. Introduce yourself.')">◉ ACTIVATE JEVIS</button>
+ <button onclick="ask('Help me manage my day and personal tasks.')">01 / PERSONAL ASSISTANT</button>
+ <button onclick="ask('Help me research and analyze a topic.')">02 / INTELLIGENCE</button>
+ <button onclick="ask('Help me organize my work and schedule.')">03 / PRODUCTIVITY</button>
+ <button onclick="ask('Help me develop my AI website business mission.')">04 / BUSINESS MISSION</button>
+ <button onclick="ask('Help me solve this problem step by step.')">05 / SYSTEM ANALYSIS</button>
 </div>
-<div class="small" style="margin-top:25px">JEVIS SYSTEMS • EXECUTIVE MODE</div>
+
+<div class="footer">JEVIS SYSTEMS • EXECUTIVE MODE</div>
+
 <script>
-function update(){document.getElementById('clock').textContent=new Date().toLocaleTimeString()}
-setInterval(update,1000);update();
-function ask(q){location.href='https://chatgpt.com/?q='+encodeURIComponent(q)}
+function updateClock(){
+ const now=new Date();
+ document.getElementById("clock").textContent=
+ now.toLocaleTimeString("en-US");
+ document.getElementById("date").textContent=
+ now.toLocaleDateString("en-US",{weekday:"long",year:"numeric",month:"long",day:"numeric"});
+}
+setInterval(updateClock,1000);
+updateClock();
+
+function ask(q){
+ window.location.href="https://chatgpt.com/?q="+encodeURIComponent(q);
+}
 </script>
 </body>
 </html>
