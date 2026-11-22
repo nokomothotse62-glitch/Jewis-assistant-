@@ -159,7 +159,35 @@ function askAI(prompt){
  window.location.href='https://chatgpt.com/?q='+encodeURIComponent(prompt);
 }
 
+
+function loadTasks(){
+ const saved = JSON.parse(localStorage.getItem('jevisTasks') || '[]');
+ const list = document.getElementById('tasks');
+ list.innerHTML = '';
+
+ saved.forEach(task => {
+  const item = document.createElement('div');
+  item.className = 'task';
+  item.textContent = '• ' + task;
+  list.appendChild(item);
+ });
+}
+
 function addTask(){
+ const input = document.getElementById('taskInput');
+ const value = input.value.trim();
+ if(!value) return;
+
+ const saved = JSON.parse(localStorage.getItem('jevisTasks') || '[]');
+ saved.push(value);
+ localStorage.setItem('jevisTasks', JSON.stringify(saved));
+
+ input.value = '';
+ loadTasks();
+}
+
+loadTasks();
+
  const input=document.getElementById('taskInput');
  const value=input.value.trim();
  if(!value)return;
